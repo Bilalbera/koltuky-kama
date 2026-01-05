@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pırıl Koltuk Yıkama | Profesyonel Temizlik</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* GENEL AYARLAR */
+        :root {
+            --primary: #00a8cc; /* Ana renk: Temizlik mavisi */
+            --dark: #333;
+            --light: #f4f4f4;
+            --white: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            background-color: var(--white);
+            color: var(--dark);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* HEADER */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* HERO SECTION (GİRİŞ) */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 70px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 5px;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #008caf;
+        }
+
+        /* HİZMETLER */
+        .services {
+            padding: 60px 0;
+            background: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* HAKKIMIZDA / NEDEN BİZ */
+        .about {
+            padding: 60px 0;
+        }
+        
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            text-align: center;
+            flex-basis: 30%;
+            margin-bottom: 20px;
+        }
+
+        /* İLETİŞİM / FOOTER */
+        footer {
+            background: #222;
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        /* WHATSAPP BUTONU */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128c7e;
+        }
+
+        /* MOBİL UYUMLULUK */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-links { display: none; } /* Basitlik için mobilde menüyü gizledik */
+            .feature-item { flex-basis: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <div class="logo">Pırıl Koltuk Yıkama</div>
+            <ul class="nav-links">
+                <li><a href="#anasayfa">Anasayfa</a></li>
+                <li><a href="#hizmetler">Hizmetler</a></li>
+                <li><a href="#hakkimizda">Neden Biz?</a></li>
+                <li><a href="#iletisim">İletişim</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero" id="anasayfa">
+        <div class="container">
+            <h1>Koltuklarınız İlk Günkü Gibi Olsun</h1>
+            <p>Profesyonel ekipmanlar ve organik deterjanlarla yerinde koltuk yıkama hizmeti.</p>
+            <a href="tel:+905551234567" class="btn">Hemen Ara: 0555 123 45 67</a>
+        </div>
+    </section>
+
+    <section class="services" id="hizmetler">
+        <div class="container">
+            <div class="section-title">
+                <h2>Hizmetlerimiz</h2>
+                <p>Evinizdeki tüm tekstil ürünleri için hijyenik çözümler.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-couch"></i>
+                    <h3>Koltuk Yıkama</h3>
+                    <p>Leke çıkarıcı özel formüllerimizle koltuklarınız derinlemesine temizlenir.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-bed"></i>
+                    <h3>Yatak Yıkama</h3>
+                    <p>Yataklarınızdaki mayt ve bakterileri %99 oranında yok ediyoruz.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-car"></i>
+                    <h3>Araç Koltuk Yıkama</h3>
+                    <p>Aracınızın koltuklarını yerinde, detaylı ve hijyenik şekilde yıkıyoruz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="hakkimizda">
+        <div class="container">
+            <div class="section-title">
+                <h2>Neden Bizi Seçmelisiniz?</h2>
+            </div>
+            <div class="features">
+                <div class="feature-item">
+                    <i class="fas fa-check-circle fa-2x" style="color:var(--primary)"></i>
+                    <h3>Garantili Temizlik</h3>
+                    <p>Memnun kalmadığınız takdirde tekrar yıkama garantisi.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-leaf fa-2x" style="color:var(--primary)"></i>
+                    <h3>Organik Deterjan</h3>
+                    <p>Sağlığa zararsız, antialerjik temizlik ürünleri.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-clock fa-2x" style="color:var(--primary)"></i>
+                    <h3>Hızlı Kuruma</h3>
+                    <p>Güçlü vakum makinelerimiz ile koltuklarınız kısa sürede kurur.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="iletisim">
+        <div class="container footer-content">
+            <h3>Pırıl Koltuk Yıkama</h3>
+            <p>İstanbul'un her yerine ücretsiz servisimiz vardır.</p>
+            <div class="contact-info">
+                <p><i class="fas fa-phone"></i> 0555 123 45 67</p>
+                <p><i class="fas fa-map-marker-alt"></i> Örnek Mahallesi, Temizlik Caddesi No:1, İstanbul</p>
+            </div>
+            <p style="margin-top:20px; font-size:0.8rem;">&copy; 2024 Pırıl Koltuk Yıkama. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/905551234567" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>
