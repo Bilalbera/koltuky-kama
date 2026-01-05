@@ -3,23 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pırıl Koltuk Yıkama | Profesyonel Temizlik</title>
+    <title>Pırıl Koltuk Yıkama | Profesyonel Temizlik Hizmetleri</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* GENEL AYARLAR */
+        /* TASARIM DEĞİŞKENLERİ */
         :root {
-            --primary: #00a8cc; /* Ana renk: Temizlik mavisi */
-            --dark: #333;
-            --light: #f4f4f4;
-            --white: #fff;
+            --primary: #00a8cc; 
+            --secondary: #25d366; /* WhatsApp Yeşili */
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+            --white: #ffffff;
+            --success: #28a745;
         }
 
+        /* GENEL SIFIRLAMA */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
@@ -28,60 +32,62 @@
             color: var(--dark);
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        ul {
-            list-style: none;
-        }
-
-        /* HEADER */
+        /* HEADER & NAV */
         header {
             background: var(--white);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
         }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 70px;
+            height: 80px;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 1.8rem;
+            font-weight: 800;
             color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .nav-links {
             display: flex;
+            list-style: none;
         }
 
         .nav-links li {
-            margin-left: 20px;
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: 0.3s;
         }
 
         .nav-links a:hover {
             color: var(--primary);
         }
 
-        /* HERO SECTION (GİRİŞ) */
+        /* HERO SECTION */
         .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            height: 90vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -89,139 +95,131 @@
             justify-content: center;
             text-align: center;
             color: var(--white);
-            margin-top: 70px;
+            padding-top: 80px;
         }
 
-        .hero h1 {
-            font-size: 3rem;
+        .hero-content h1 {
+            font-size: 3.5rem;
             margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .btn {
+        /* KOPYALAMA BUTONU STİLİ */
+        .btn-copy {
             display: inline-block;
             background: var(--primary);
             color: var(--white);
-            padding: 12px 30px;
-            border-radius: 5px;
-            transition: 0.3s;
+            padding: 18px 35px;
+            border-radius: 50px;
+            font-size: 1.2rem;
             font-weight: bold;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,168,204,0.4);
         }
 
-        .btn:hover {
-            background: #008caf;
+        .btn-copy:active {
+            transform: scale(0.95);
+        }
+
+        .btn-copy.copied {
+            background: var(--success);
+            box-shadow: 0 4px 15px rgba(40,167,69,0.4);
         }
 
         /* HİZMETLER */
         .services {
-            padding: 60px 0;
+            padding: 100px 0;
             background: var(--light);
         }
 
-        .section-title {
+        .section-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 60px;
         }
 
-        .section-title h2 {
-            font-size: 2rem;
-            color: var(--primary);
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
         }
 
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 30px;
         }
 
-        .service-card {
+        .card {
             background: var(--white);
-            padding: 20px;
-            border-radius: 8px;
+            padding: 40px;
+            border-radius: 15px;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
-        .service-card:hover {
-            transform: translateY(-5px);
+        .card:hover {
+            transform: translateY(-10px);
         }
 
-        .service-card i {
-            font-size: 3rem;
+        .card i {
+            font-size: 3.5rem;
             color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        /* HAKKIMIZDA / NEDEN BİZ */
-        .about {
-            padding: 60px 0;
-        }
-        
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin-top: 30px;
-        }
-
-        .feature-item {
-            text-align: center;
-            flex-basis: 30%;
             margin-bottom: 20px;
         }
 
-        /* İLETİŞİM / FOOTER */
-        footer {
-            background: #222;
-            color: var(--white);
-            padding: 40px 0;
-            text-align: center;
-        }
-
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .contact-info i {
-            margin-right: 10px;
-            color: var(--primary);
-        }
-
         /* WHATSAPP BUTONU */
-        .whatsapp-float {
+        .whatsapp-fixed {
             position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 40px;
-            right: 40px;
-            background-color: #25d366;
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 3px #999;
-            z-index: 100;
+            bottom: 30px;
+            right: 30px;
+            background: var(--secondary);
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 35px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 999;
+            transition: 0.3s;
         }
 
-        .whatsapp-float:hover {
-            background-color: #128c7e;
+        .whatsapp-fixed:hover {
+            transform: scale(1.1);
+            color: white;
         }
 
-        /* MOBİL UYUMLULUK */
+        /* FOOTER */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 60px 0 20px;
+            text-align: center;
+        }
+
+        .footer-info {
+            margin-bottom: 30px;
+        }
+
+        /* MOBIL AYARLAR */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .nav-links { display: none; } /* Basitlik için mobilde menüyü gizledik */
-            .feature-item { flex-basis: 100%; }
+            .hero-content h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+            .btn-copy { width: 100%; font-size: 1rem; }
         }
     </style>
 </head>
@@ -229,90 +227,95 @@
 
     <header>
         <div class="container navbar">
-            <div class="logo">Pırıl Koltuk Yıkama</div>
+            <div class="logo">
+                <i class="fas fa-hand-sparkles"></i> PIRIL KOLTUK
+            </div>
             <ul class="nav-links">
                 <li><a href="#anasayfa">Anasayfa</a></li>
                 <li><a href="#hizmetler">Hizmetler</a></li>
-                <li><a href="#hakkimizda">Neden Biz?</a></li>
                 <li><a href="#iletisim">İletişim</a></li>
             </ul>
         </div>
     </header>
 
     <section class="hero" id="anasayfa">
-        <div class="container">
-            <h1>Koltuklarınız İlk Günkü Gibi Olsun</h1>
-            <p>Profesyonel ekipmanlar ve organik deterjanlarla yerinde koltuk yıkama hizmeti.</p>
-            <a href="tel:+905551234567" class="btn">Hemen Ara: 0555 123 45 67</a>
+        <div class="container hero-content">
+            <h1>Evinize Hijyen Geliyor</h1>
+            <p>Son teknoloji vakumlu makineler ve bitkisel şampuanlar ile koltuklarınızı yerinde temizliyoruz.</p>
+            
+            <button class="btn-copy" onclick="copyToClipboard()" id="mainBtn">
+                <i class="fas fa-phone-alt"></i> <span id="numText">0555 123 45 67</span>
+            </button>
+            <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">Tıkla, Numarayı Kopyala!</p>
         </div>
     </section>
 
     <section class="services" id="hizmetler">
         <div class="container">
-            <div class="section-title">
-                <h2>Hizmetlerimiz</h2>
-                <p>Evinizdeki tüm tekstil ürünleri için hijyenik çözümler.</p>
+            <div class="section-header">
+                <h2>Neler Yapıyoruz?</h2>
+                <p>Her türlü döşeme ve yüzey için profesyonel çözümler.</p>
             </div>
             <div class="services-grid">
-                <div class="service-card">
+                <div class="card">
                     <i class="fas fa-couch"></i>
                     <h3>Koltuk Yıkama</h3>
-                    <p>Leke çıkarıcı özel formüllerimizle koltuklarınız derinlemesine temizlenir.</p>
+                    <p>Leke çıkarma ve derinlemesine dezenfeksiyon işlemleri.</p>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-bed"></i>
+                <div class="card">
+                    <i class="fas fa-mattress-pillow"></i>
                     <h3>Yatak Yıkama</h3>
-                    <p>Yataklarınızdaki mayt ve bakterileri %99 oranında yok ediyoruz.</p>
+                    <p>Mite ve akarlara karşı %100 etkili buharlı temizlik.</p>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-car"></i>
-                    <h3>Araç Koltuk Yıkama</h3>
-                    <p>Aracınızın koltuklarını yerinde, detaylı ve hijyenik şekilde yıkıyoruz.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="about" id="hakkimizda">
-        <div class="container">
-            <div class="section-title">
-                <h2>Neden Bizi Seçmelisiniz?</h2>
-            </div>
-            <div class="features">
-                <div class="feature-item">
-                    <i class="fas fa-check-circle fa-2x" style="color:var(--primary)"></i>
-                    <h3>Garantili Temizlik</h3>
-                    <p>Memnun kalmadığınız takdirde tekrar yıkama garantisi.</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-leaf fa-2x" style="color:var(--primary)"></i>
-                    <h3>Organik Deterjan</h3>
-                    <p>Sağlığa zararsız, antialerjik temizlik ürünleri.</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-clock fa-2x" style="color:var(--primary)"></i>
-                    <h3>Hızlı Kuruma</h3>
-                    <p>Güçlü vakum makinelerimiz ile koltuklarınız kısa sürede kurur.</p>
+                <div class="card">
+                    <i class="fas fa-car-side"></i>
+                    <h3>Araç İçi Temizlik</h3>
+                    <p>Araç koltuklarınız ve taban halısı için detaylı hijyen.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <footer id="iletisim">
-        <div class="container footer-content">
-            <h3>Pırıl Koltuk Yıkama</h3>
-            <p>İstanbul'un her yerine ücretsiz servisimiz vardır.</p>
-            <div class="contact-info">
-                <p><i class="fas fa-phone"></i> 0555 123 45 67</p>
-                <p><i class="fas fa-map-marker-alt"></i> Örnek Mahallesi, Temizlik Caddesi No:1, İstanbul</p>
+        <div class="container">
+            <div class="footer-info">
+                <h3>Pırıl Koltuk Yıkama Servisi</h3>
+                <p style="margin: 15px 0;">Haftanın 7 günü hizmetinizdeyiz.</p>
+                <p><i class="fas fa-map-marker-alt"></i> Tüm İstanbul Bölgeleri</p>
             </div>
-            <p style="margin-top:20px; font-size:0.8rem;">&copy; 2024 Pırıl Koltuk Yıkama. Tüm hakları saklıdır.</p>
+            <hr style="opacity: 0.1; margin-bottom: 20px;">
+            <p>&copy; 2024 Pırıl Koltuk Yıkama. Profesyonel Temizlik Çözümleri.</p>
         </div>
     </footer>
 
-    <a href="https://wa.me/905551234567" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/905551234567?text=Merhaba, koltuk yıkama hakkında bilgi alabilir miyim?" class="whatsapp-fixed" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
+
+    <script>
+        function copyToClipboard() {
+            // Numarayı al
+            const number = document.getElementById("numText").innerText;
+            const btn = document.getElementById("mainBtn");
+            const originalContent = btn.innerHTML;
+
+            // Panoya kopyala
+            navigator.clipboard.writeText(number).then(() => {
+                // Görsel geri bildirim
+                btn.innerHTML = '<i class="fas fa-check"></i> Numara Kopyalandı!';
+                btn.classList.add("copied");
+
+                // 2 saniye sonra eski haline getir
+                setTimeout(() => {
+                    btn.innerHTML = originalContent;
+                    btn.classList.remove("copied");
+                }, 2500);
+            }).catch(err => {
+                console.error('Kopyalanamadı', err);
+                alert("Numara: " + number);
+            });
+        }
+    </script>
 
 </body>
 </html>
