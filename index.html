@@ -1,321 +1,813 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pırıl Koltuk Yıkama | Profesyonel Temizlik Hizmetleri</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* TASARIM DEĞİŞKENLERİ */
-        :root {
-            --primary: #00a8cc; 
-            --secondary: #25d366; /* WhatsApp Yeşili */
-            --dark: #2c3e50;
-            --light: #f8f9fa;
-            --white: #ffffff;
-            --success: #28a745;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BilalAI 1.0 - Flash</title>
+  <style>
+    :root {
+      --bg-color: #0b0f19;
+      --card-bg: #151c2c;
+      --accent-color: #00bfff;
+      --accent-glow: rgba(0, 191, 255, 0.4);
+      --text-main: #f0f4f8;
+      --text-muted: #8a99ad;
+      --user-msg: #1e293b;
+      --ai-msg: #111827;
+      --system-msg: rgba(0, 191, 255, 0.1);
+      --border-color: #2a364f;
+      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-        /* GENEL SIFIRLAMA */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            scroll-behavior: smooth;
-        }
+    [data-theme="light"] {
+      --bg-color: #f4f6f9;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --user-msg: #e2e8f0;
+      --ai-msg: #ffffff;
+      --system-msg: #e0f2fe;
+      --border-color: #cbd5e1;
+    }
 
-        body {
-            line-height: 1.6;
-            background-color: var(--white);
-            color: var(--dark);
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: background-color 0.3s, color 0.3s;
+    }
 
-        /* HEADER & NAV */
-        header {
-            background: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
+    /* --- HEADER --- */
+    header {
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
 
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-        }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    .brand h1 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
+    .flash-badge {
+      background: linear-gradient(135deg, #00bfff, #005f9e);
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      box-shadow: 0 0 10px var(--accent-glow);
+      animation: pulse 2s infinite;
+    }
 
-        .nav-links li {
-            margin-left: 30px;
-        }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 5px var(--accent-glow); }
+      50% { box-shadow: 0 0 15px var(--accent-color); }
+      100% { box-shadow: 0 0 5px var(--accent-glow); }
+    }
 
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 600;
-            transition: 0.3s;
-        }
+    .header-controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
 
-        .nav-links a:hover {
-            color: var(--primary);
-        }
+    .btn-icon {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.9rem;
+    }
 
-        /* HERO SECTION */
-        .hero {
-            height: 90vh;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: var(--white);
-            padding-top: 80px;
-        }
+    .btn-icon:hover {
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+    }
 
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
+    /* --- MAIN CHAT CONTAINER --- */
+    .chat-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      scroll-behavior: smooth;
+    }
 
-        .hero-content p {
-            font-size: 1.4rem;
-            margin-bottom: 40px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    .message {
+      max-width: 80%;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      animation: fadeIn 0.3s ease-out;
+    }
 
-        /* KOPYALAMA BUTONU STİLİ */
-        .btn-copy {
-            display: inline-block;
-            background: var(--primary);
-            color: var(--white);
-            padding: 18px 35px;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            border: none;
-            box-shadow: 0 4px 15px rgba(0,168,204,0.4);
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        .btn-copy:active {
-            transform: scale(0.95);
-        }
+    .message.user {
+      align-self: flex-end;
+    }
 
-        .btn-copy.copied {
-            background: var(--success);
-            box-shadow: 0 4px 15px rgba(40,167,69,0.4);
-        }
+    .message.ai {
+      align-self: flex-start;
+    }
 
-        /* HİZMETLER */
-        .services {
-            padding: 100px 0;
-            background: var(--light);
-        }
+    .message.system {
+      align-self: center;
+      max-width: 90%;
+    }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
+    .bubble {
+      padding: 14px 18px;
+      border-radius: 12px;
+      line-height: 1.5;
+      font-size: 0.95rem;
+      word-break: break-word;
+      border: 1px solid var(--border-color);
+    }
 
-        .section-header h2 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 15px;
-        }
+    .user .bubble {
+      background-color: var(--user-msg);
+      border-bottom-right-radius: 2px;
+    }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
+    .ai .bubble {
+      background-color: var(--ai-msg);
+      border-bottom-left-radius: 2px;
+    }
 
-        .card {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 15px;
-            text-align: center;
-            transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
+    .system .bubble {
+      background-color: var(--system-msg);
+      border: 1px solid var(--accent-color);
+      color: var(--accent-color);
+      font-weight: 500;
+      text-align: center;
+    }
 
-        .card:hover {
-            transform: translateY(-10px);
-        }
+    /* Thinking Step */
+    .thinking-box {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: rgba(0, 0, 0, 0.2);
+      padding: 8px 12px;
+      border-left: 3px solid var(--accent-color);
+      border-radius: 4px;
+      margin-bottom: 8px;
+      font-style: italic;
+    }
 
-        .card i {
-            font-size: 3.5rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
+    /* Feedback Buttons */
+    .feedback-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+      align-self: flex-start;
+    }
 
-        /* WHATSAPP BUTONU */
-        .whatsapp-fixed {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--secondary);
-            color: white;
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 35px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            z-index: 999;
-            transition: 0.3s;
-        }
+    .btn-feedback {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
 
-        .whatsapp-fixed:hover {
-            transform: scale(1.1);
-            color: white;
-        }
+    .btn-feedback:hover {
+      color: var(--accent-color);
+    }
 
-        /* FOOTER */
-        footer {
-            background: #1a1a1a;
-            color: white;
-            padding: 60px 0 20px;
-            text-align: center;
-        }
+    /* Code Blocks */
+    pre {
+      background: #050811;
+      color: #00ffcc;
+      padding: 12px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-family: 'Courier New', Courier, monospace;
+      margin: 8px 0;
+      border: 1px solid var(--border-color);
+    }
 
-        .footer-info {
-            margin-bottom: 30px;
-        }
+    /* --- INPUT AREA --- */
+    .input-container {
+      background: var(--card-bg);
+      border-top: 1px solid var(--border-color);
+      padding: 16px 24px;
+      display: flex;
+      gap: 12px;
+    }
 
-        /* MOBIL AYARLAR */
-        @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.2rem; }
-            .nav-links { display: none; }
-            .btn-copy { width: 100%; font-size: 1rem; }
-        }
-    </style>
+    textarea {
+      flex: 1;
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 12px;
+      border-radius: 8px;
+      resize: none;
+      height: 50px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    textarea:focus {
+      border-color: var(--accent-color);
+    }
+
+    .btn-send {
+      background: var(--accent-color);
+      color: #000;
+      border: none;
+      padding: 0 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-send:hover {
+      background: #33ccff;
+    }
+
+    /* --- ADMIN PANEL MODAL --- */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.75);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .admin-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--accent-color);
+      width: 90%;
+      max-width: 700px;
+      max-height: 85vh;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 0 25px var(--accent-glow);
+    }
+
+    .admin-header {
+      padding: 16px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 191, 255, 0.05);
+    }
+
+    .admin-body {
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .metric-card {
+      background: var(--bg-color);
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      text-align: center;
+    }
+
+    .metric-card span {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .metric-card strong {
+      font-size: 1.4rem;
+      color: var(--accent-color);
+    }
+
+    .section-title {
+      font-size: 0.95rem;
+      color: var(--accent-color);
+      margin-bottom: 8px;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 4px;
+    }
+
+    .admin-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-danger {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .btn-secondary {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .system-input-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    .system-input-group input {
+      flex: 1;
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px;
+      border-radius: 6px;
+      outline: none;
+    }
+
+    /* Login Box inside Admin */
+    .login-box {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .login-box input {
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px;
+      border-radius: 6px;
+      text-align: center;
+      outline: none;
+    }
+
+  </style>
 </head>
 <body>
 
-    <header>
-        <div class="container navbar">
-            <div class="logo">
-                <i class="fas fa-hand-sparkles"></i> PIRIL KOLTUK
-            </div>
-            <ul class="nav-links">
-                <li><a href="#anasayfa">Anasayfa</a></li>
-                <li><a href="#hizmetler">Hizmetler</a></li>
-                <li><a href="#iletisim">İletişim</a></li>
-            </ul>
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <h1>BilalAI</h1>
+      <span class="flash-badge">1.0 - FLASH</span>
+    </div>
+    <div class="header-controls">
+      <button class="btn-icon" id="themeToggleBtn">🌙 / ☀️</button>
+      <button class="btn-icon" id="openAdminBtn" title="Kurucu Paneli (Ctrl+Shift+A)">🔐 Kurucu</button>
+    </div>
+  </header>
+
+  <!-- CHAT AREA -->
+  <div class="chat-container" id="chatContainer"></div>
+
+  <!-- INPUT AREA -->
+  <div class="input-container">
+    <textarea id="userInput" placeholder="Bir mesaj yazın veya yapmamı istediğiniz siteyi/uygulamayı tarif edin... (Enter ile gönder)"></textarea>
+    <button class="btn-send" id="sendBtn">Gönder</button>
+  </div>
+
+  <!-- ADMIN PANEL MODAL -->
+  <div class="modal-overlay" id="adminModal">
+    <div class="admin-panel">
+      <div class="admin-header">
+        <h3>🔐 Kurucu Yonetim Paneli</h3>
+        <button class="btn-icon" id="closeAdminBtn">✕</button>
+      </div>
+      
+      <!-- LOGIN SECTION -->
+      <div class="login-box" id="adminLogin">
+        <p>Devam etmek için Kurucu Parolasını girin:</p>
+        <input type="password" id="founderPassword" placeholder="Parola">
+        <button class="btn-secondary" id="loginBtn">Giriş Yap</button>
+      </div>
+
+      <!-- DASHBOARD SECTION -->
+      <div class="admin-body" id="adminDashboard" style="display: none;">
+        
+        <!-- Metrics -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <span>Performans Skoru</span>
+            <strong id="perfScore">100 / 100</strong>
+          </div>
+          <div class="metric-card">
+            <span>Oğrenilen Hatalar</span>
+            <strong id="errorCount">0</strong>
+          </div>
+          <div class="metric-card">
+            <span>Pratik Edilen Beceriler</span>
+            <strong id="skillCount">0 Dili</strong>
+          </div>
         </div>
-    </header>
 
-    <section class="hero" id="anasayfa">
-        <div class="container hero-content">
-            <h1>Evinize Hijyen Geliyor</h1>
-            <p>Son teknoloji vakumlu makineler ve bitkisel şampuanlar ile koltuklarınızı yerinde temizliyoruz.</p>
-            
-            <button class="btn-copy" onclick="copyToClipboard()" id="mainBtn">
-                <i class="fas fa-phone-alt"></i> <span id="numText">0555 123 45 67</span>
-            </button>
-            <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">Tıkla, Numarayı Kopyala!</p>
+        <!-- System Message -->
+        <div>
+          <div class="section-title">Sistem Düzeyi Mesaj Gönder (Kurucu Yetkisi)</div>
+          <div class="system-input-group">
+            <input type="text" id="systemMsgInput" placeholder="Sistem talimatı veya direktif yazın...">
+            <button class="btn-secondary" id="sendSystemMsgBtn">Gönder</button>
+          </div>
         </div>
-    </section>
 
-    <section class="services" id="hizmetler">
-        <div class="container">
-            <div class="section-header">
-                <h2>Neler Yapıyoruz?</h2>
-                <p>Her türlü döşeme ve yüzey için profesyonel çözümler.</p>
-            </div>
-            <div class="services-grid">
-                <div class="card">
-                    <i class="fas fa-couch"></i>
-                    <h3>Koltuk Yıkama</h3>
-                    <p>Leke çıkarma ve derinlemesine dezenfeksiyon işlemleri.</p>
-                </div>
-                <div class="card">
-                    <i class="fas fa-mattress-pillow"></i>
-                    <h3>Yatak Yıkama</h3>
-                    <p>Mite ve akarlara karşı %100 etkili buharlı temizlik.</p>
-                </div>
-                <div class="card">
-                    <i class="fas fa-car-side"></i>
-                    <h3>Araç İçi Temizlik</h3>
-                    <p>Araç koltuklarınız ve taban halısı için detaylı hijyen.</p>
-                </div>
-            </div>
+        <!-- Skill Map -->
+        <div>
+          <div class="section-title">Yetenek Haritası (Pratik İlerlemesi)</div>
+          <div id="skillMapDisplay" style="font-size: 0.85rem; color: var(--text-muted);">Henüz kod pratiği kaydedilmedi.</div>
         </div>
-    </section>
 
-    <footer id="iletisim">
-        <div class="container">
-            <div class="footer-info">
-                <h3>Pırıl Koltuk Yıkama Servisi</h3>
-                <p style="margin: 15px 0;">Haftanın 7 günü hizmetinizdeyiz.</p>
-                <p><i class="fas fa-map-marker-alt"></i> Tüm İstanbul Bölgeleri</p>
-            </div>
-            <hr style="opacity: 0.1; margin-bottom: 20px;">
-            <p>&copy; 2024 Pırıl Koltuk Yıkama. Profesyonel Temizlik Çözümleri.</p>
+        <!-- Error Log -->
+        <div>
+          <div class="section-title">Hata ve Düzeltme Günlüğü</div>
+          <div id="errorLogDisplay" style="font-size: 0.85rem; color: var(--text-muted); max-height: 100px; overflow-y: auto;">Kayıtlı hata yok.</div>
         </div>
-    </footer>
 
-    <a href="https://wa.me/905551234567?text=Merhaba, koltuk yıkama hakkında bilgi alabilir miyim?" class="whatsapp-fixed" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
+        <!-- Controls -->
+        <div class="admin-controls">
+          <button class="btn-secondary" id="exportLogsBtn">Günlükleri İndir (.json)</button>
+          <button class="btn-danger" id="clearMemoryBtn">Hafızayı Sıfırla</button>
+        </div>
 
-    <script>
-        function copyToClipboard() {
-            // Numarayı al
-            const number = document.getElementById("numText").innerText;
-            const btn = document.getElementById("mainBtn");
-            const originalContent = btn.innerHTML;
+      </div>
+    </div>
+  </div>
 
-            // Panoya kopyala
-            navigator.clipboard.writeText(number).then(() => {
-                // Görsel geri bildirim
-                btn.innerHTML = '<i class="fas fa-check"></i> Numara Kopyalandı!';
-                btn.classList.add("copied");
+  <script>
+    // --- FOUNDER CONFIG & CONSTANTS ---
+    const FOUNDER_PASS = "BilalAI_founder_2024";
 
-                // 2 saniye sonra eski haline getir
-                setTimeout(() => {
-                    btn.innerHTML = originalContent;
-                    btn.classList.remove("copied");
-                }, 2500);
-            }).catch(err => {
-                console.error('Kopyalanamadı', err);
-                alert("Numara: " + number);
-            });
+    // --- STATE MANAGEMENT ---
+    let state = {
+      theme: 'dark',
+      history: [],
+      errorLog: [],
+      skills: {}, // e.g., { "JavaScript": 5, "Python": 2 }
+      performanceScore: 85,
+      isLoggedIn: false
+    };
+
+    // --- INITIALIZATION ---
+    window.addEventListener('DOMContentLoaded', () => {
+      loadStateFromStorage();
+      renderChatHistory();
+      setupEventListeners();
+      
+      if (state.history.length === 0) {
+        addAiMessage("Merhaba! Ben **BilalAI 1.0 - Flash**. Kod yazma, web sitesi/uygulama geliştirme ve karmaşık mantık yürütme süreçlerinde size yardımcı olmak için tasarlandım. Bugün ne inşa ediyoruz?", false);
+      }
+    });
+
+    // --- STORAGE HANDLERS ---
+    function loadStateFromStorage() {
+      const saved = localStorage.getItem('bilalAI_data');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          state = { ...state, ...parsed };
+        } catch (e) {
+          console.error("Hafıza yüklenirken hata oluştu:", e);
         }
-    </script>
+      }
+      document.documentElement.setAttribute('data-theme', state.theme);
+    }
 
+    function saveStateToStorage() {
+      localStorage.setItem('bilalAI_data', JSON.stringify({
+        theme: state.theme,
+        history: state.history,
+        errorLog: state.errorLog,
+        skills: state.skills,
+        performanceScore: state.performanceScore
+      }));
+    }
+
+    // --- UI EVENT LISTENERS ---
+    function setupEventListeners() {
+      // Send message
+      document.getElementById('sendBtn').addEventListener('click', handleUserSend);
+      document.getElementById('userInput').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          handleUserSend();
+        }
+      });
+
+      // Theme toggle
+      document.getElementById('themeToggleBtn').addEventListener('click', () => {
+        state.theme = state.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', state.theme);
+        saveStateToStorage();
+      });
+
+      // Admin Panel Open/Close
+      const openAdmin = () => document.getElementById('adminModal').classList.add('active');
+      const closeAdmin = () => document.getElementById('adminModal').classList.remove('active');
+
+      document.getElementById('openAdminBtn').addEventListener('click', openAdmin);
+      document.getElementById('closeAdminBtn').addEventListener('click', closeAdmin);
+
+      // Shortcut Ctrl+Shift+A
+      window.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+          e.preventDefault();
+          openAdmin();
+        }
+      });
+
+      // Admin Login
+      document.getElementById('loginBtn').addEventListener('click', () => {
+        const pass = document.getElementById('founderPassword').value;
+        if (pass === FOUNDER_PASS) {
+          state.isLoggedIn = true;
+          document.getElementById('adminLogin').style.display = 'none';
+          document.getElementById('adminDashboard').style.display = 'flex';
+          updateAdminDashboard();
+        } else {
+          alert('Hatalı Kurucu Parolası!');
+        }
+      });
+
+      // Send System Message
+      document.getElementById('sendSystemMsgBtn').addEventListener('click', () => {
+        const input = document.getElementById('systemMsgInput');
+        const text = input.value.trim();
+        if (text) {
+          addSystemMessage(text);
+          input.value = '';
+          closeAdmin();
+          processAiResponse(text, true);
+        }
+      });
+
+      // Clear Memory
+      document.getElementById('clearMemoryBtn').addEventListener('click', () => {
+        if (confirm("Tüm sohbet ve öğrenme hafızası silinsin mi?")) {
+          localStorage.removeItem('bilalAI_data');
+          location.reload();
+        }
+      });
+
+      // Export Logs
+      document.getElementById('exportLogsBtn').addEventListener('click', () => {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.setAttribute("href", dataStr);
+        downloadAnchor.setAttribute("download", `BilalAI_Logs_${Date.now()}.json`);
+        document.body.appendChild(downloadAnchor);
+        downloadAnchor.click();
+        downloadAnchor.remove();
+      });
+    }
+
+    // --- CHAT LOGIC ---
+    function handleUserSend() {
+      const input = document.getElementById('userInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      addUserMessage(text);
+      input.value = '';
+      processAiResponse(text, false);
+    }
+
+    function addUserMessage(text) {
+      const msg = { sender: 'user', text, timestamp: new Date().toISOString() };
+      state.history.push(msg);
+      saveStateToStorage();
+      renderSingleMessage(msg);
+    }
+
+    function addSystemMessage(text) {
+      const msg = { sender: 'system', text, timestamp: new Date().toISOString() };
+      state.history.push(msg);
+      saveStateToStorage();
+      renderSingleMessage(msg);
+    }
+
+    function addAiMessage(text, isCorrection = false) {
+      const msg = { sender: 'ai', text, timestamp: new Date().toISOString(), id: Date.now() };
+      state.history.push(msg);
+      saveStateToStorage();
+      renderSingleMessage(msg);
+    }
+
+    function renderChatHistory() {
+      const container = document.getElementById('chatContainer');
+      container.innerHTML = '';
+      state.history.forEach(msg => renderSingleMessage(msg));
+    }
+
+    function renderSingleMessage(msg) {
+      const container = document.getElementById('chatContainer');
+      const msgDiv = document.createElement('div');
+      msgDiv.classList.add('message', msg.sender);
+
+      let contentHTML = '';
+
+      if (msg.sender === 'system') {
+        contentHTML = `<div class="bubble">🔐 [Sistem Mesajı / Kurucu]: ${escapeHTML(msg.text)}</div>`;
+      } else if (msg.sender === 'user') {
+        contentHTML = `<div class="bubble">${escapeHTML(msg.text)}</div>`;
+      } else {
+        // AI Message
+        const formattedText = parseMarkdown(msg.text);
+        contentHTML = `
+          <div class="bubble">
+            ${msg.thinking ? `<div class="thinking-box">💭 <strong>Düşünce Süreci:</strong> ${escapeHTML(msg.thinking)}</div>` : ''}
+            <div>${formattedText}</div>
+          </div>
+          <div class="feedback-actions">
+            <button class="btn-feedback" onclick="handleFeedback(${msg.id}, 'up')">👍</button>
+            <button class="btn-feedback" onclick="handleFeedback(${msg.id}, 'down')">👎 Düzelt</button>
+          </div>
+        `;
+      }
+
+      msgDiv.innerHTML = contentHTML;
+      container.appendChild(msgDiv);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // --- AI RESPONSE SIMULATION ENGINE ---
+    function processAiResponse(userInput, isSystemMessage) {
+      const container = document.getElementById('chatContainer');
+
+      // Show Thinking Indicator
+      const thinkingDiv = document.createElement('div');
+      thinkingDiv.classList.add('message', 'ai');
+      thinkingDiv.innerHTML = `<div class="bubble" style="opacity: 0.7;">⚡ <i>BilalAI 1.0 - Flash düşünüyor ve analiz ediyor...</i></div>`;
+      container.appendChild(thinkingDiv);
+      container.scrollTop = container.scrollHeight;
+
+      setTimeout(() => {
+        thinkingDiv.remove();
+
+        let thinkingPath = "";
+        let responseText = "";
+
+        // Detect Coding Intent & Practice
+        detectAndRecordSkills(userInput);
+
+        if (isSystemMessage) {
+          thinkingPath = "Sistem seviyesinde yetkili komut algılandı. Kurucu kimliği doğrulandı. Sistem öncelikleri güncelleniyor.";
+          responseText = `Merhaba Kurucum, Bilal. Sistem mesajınızı ve direktiflerinizi aldım. Yapılandırma başarıyla hafızama işlendi. Nasıl devam etmek istersiniz?`;
+        } else {
+          // General Response Generation Logic
+          const lower = userInput.toLowerCase();
+
+          if (lower.includes('site') || lower.includes('uygulama') || lower.includes('kod') || lower.includes('yap')) {
+            thinkingPath = "Kullanıcı bir yazılım/uygulama geliştirme isteğinde bulundu. Mimari gereksinimler analiz ediliyor. Clean code standartları hazırlanıyor.";
+            responseText = `İstediğiniz projeyi **BilalAI 1.0 - Flash** mimarisiyle hemen kurguluyorum.\n\nİşte temel bileşenler ve kod yapısı:\n\n\`\`\`javascript\n// BilalAI Otomatik Oluşturulan Uygulama Şablonu\nfunction initApp() {\n  console.log("Uygulama başarıyla başlatıldı.");\n}\ninitApp();\n\`\`\`\n\nBu yapıyı geliştirmemi isterseniz spesifik detayları (veritabanı, arayüz veya diller) iletebilirsiniz!`;
+          } else if (lower.includes('kimsin') || lower.includes('adın ne')) {
+            thinkingPath = "Kimlik sorgusu tespit edildi. Model detayları ve kurucu bilgisi çağrılıyor.";
+            responseText = `Ben **BilalAI 1.0 - Flash**. Kurucum Bilal tarafından geliştirilmiş; kod yazma, uygulama mimarisi tasarlama ve kendini sürekli geliştirme yeteneğine sahip özel bir yapay zeka asistanıyım.`;
+          } else {
+            thinkingPath = "Gelen metin analiz edildi. Doğal dil işleme (NLP) ile en uygun yanıt oluşturuluyor.";
+            responseText = `Anladım. "${userInput}" talebiniz doğrultusunda sistemlerimi optimize ediyorum. Bu konuda detaylı bir kod veya mimari çözümü üretmemi ister misiniz?`;
+          }
+        }
+
+        // Increase performance slightly on success
+        state.performanceScore = Math.min(100, state.performanceScore + 1);
+
+        const aiMsg = {
+          sender: 'ai',
+          text: responseText,
+          thinking: thinkingPath,
+          timestamp: new Date().toISOString(),
+          id: Date.now()
+        };
+
+        state.history.push(aiMsg);
+        saveStateToStorage();
+        renderSingleMessage(aiMsg);
+
+      }, 1200); // Simulated delay
+    }
+
+    // --- FEEDBACK & SELF IMPROVEMENT ENGINE ---
+    window.handleFeedback = function(msgId, type) {
+      if (type === 'down') {
+        const correctionNote = prompt("BilalAI neyi hatalı yaptı? (Bu bilgi hafızaya kaydedilecek ve performans artırılacaktır):");
+        if (correctionNote) {
+          state.errorLog.push({
+            timestamp: new Date().toLocaleString(),
+            note: correctionNote
+          });
+          state.performanceScore = Math.max(50, state.performanceScore - 3);
+          alert("Geri bildirim alındı. BilalAI bu hatayı hafızasına kaydetti.");
+          saveStateToStorage();
+        }
+      } else {
+        state.performanceScore = Math.min(100, state.performanceScore + 2);
+        alert("Teşekkürler! Performans skoru artırıldı.");
+        saveStateToStorage();
+      }
+    };
+
+    function detectAndRecordSkills(text) {
+      const langs = ['javascript', 'js', 'python', 'html', 'css', 'react', 'flutter', 'java', 'cpp', 'c#', 'php', 'sql'];
+      const lower = text.toLowerCase();
+      
+      langs.forEach(lang => {
+        if (lower.includes(lang)) {
+          const key = lang.toUpperCase();
+          state.skills[key] = (state.skills[key] || 0) + 1;
+        }
+      });
+      saveStateToStorage();
+    }
+
+    function updateAdminDashboard() {
+      document.getElementById('perfScore').innerText = `${state.performanceScore} / 100`;
+      document.getElementById('errorCount').innerText = state.errorLog.length;
+      
+      const skillKeys = Object.keys(state.skills);
+      document.getElementById('skillCount').innerText = `${skillKeys.length} Dil/Teknoloji`;
+
+      // Skill Map Display
+      if (skillKeys.length > 0) {
+        document.getElementById('skillMapDisplay').innerHTML = skillKeys.map(k => `<strong>${k}</strong>: ${state.skills[k]} Pratik`).join(' | ');
+      }
+
+      // Error Log Display
+      if (state.errorLog.length > 0) {
+        document.getElementById('errorLogDisplay').innerHTML = state.errorLog.map(e => `<div>• [${e.timestamp}] ${escapeHTML(e.note)}</div>`).join('');
+      }
+    }
+
+    // --- UTILS ---
+    function escapeHTML(str) {
+      return str.replace(/[&<>'"]/g, 
+        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+      );
+    }
+
+    function parseMarkdown(text) {
+      let html = escapeHTML(text);
+      // Code blocks
+      html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+      // Bold
+      html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      // Line breaks
+      html = html.replace(/\n/g, '<br>');
+      return html;
+    }
+  </script>
 </body>
 </html>
