@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BilalAI 1.0 - Flash</title>
+  <title>BilalAI - Multi-Model AI Studio</title>
   <style>
     :root {
       --bg-color: #0b0f19;
@@ -104,7 +104,7 @@
     }
 
     .message {
-      max-width: 80%;
+      max-width: 85%;
       display: flex;
       flex-direction: column;
       gap: 6px;
@@ -142,12 +142,13 @@
     .thinking-box {
       font-size: 0.85rem;
       color: var(--text-muted);
-      background: rgba(0, 0, 0, 0.2);
-      padding: 8px 12px;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 10px 14px;
       border-left: 3px solid var(--accent-color);
       border-radius: 4px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       font-style: italic;
+      white-space: pre-line;
     }
 
     .feedback-actions {
@@ -316,10 +317,9 @@
   <div class="input-container">
     <textarea id="userInput" placeholder="Mesajınızı yazın... (Enter ile gönder)"></textarea>
     
-    <!-- Model Seçenekleri Kutusu -->
     <select class="model-select" id="modelSelect">
       <option value="BilalAI 1.0 - Flash">Flash 1.0</option>
-      <option value="BilalAI 1.0 - Pro">Pro 1.0 (Planlanan)</option>
+      <option value="BilalAI 1.0 - Pro">Pro 1.0</option>
     </select>
 
     <button class="btn-send" id="sendBtn">Gönder</button>
@@ -379,6 +379,29 @@
   <script>
     const FOUNDER_PASS = "BilalAI_founder_2024";
 
+    // MODEL METADATA VE DAVRANIŞ AYARLARI
+    const MODEL_CONFIGS = {
+      'BilalAI 1.0 - Flash': {
+        thinkingTime: 1000, // 1 saniye
+        badgeText: '1.0 - FLASH',
+        reasoningSteps: [
+          "Girdi hızlıca analiz ediliyor...",
+          "Optimum hızlı çözüm kurgulanıyor."
+        ],
+        getResponse: (prompt) => `**[BilalAI 1.0 - Flash Yanıtı]**\n\nHızlı kod çözümü:\n\n\`\`\`javascript\n// Flash 1.0 - Hızlı Çıktı\nfunction quickTask() {\n  console.log("İşlem tamamlandı: ${prompt}");\n}\nquickTask();\n\`\`\`\n\nPratik modda üretilmiştir.`
+      },
+      'BilalAI 1.0 - Pro': {
+        thinkingTime: 3000, // 3 saniye
+        badgeText: '1.0 - PRO 🧠',
+        reasoningSteps: [
+          "Katman 1: Derinlikli istem mantığı analiz ediliyor...",
+          "Katman 2: Veritabanı ve performans mimarisi simüle ediliyor...",
+          "Katman 3: Hata toleransı ve güvenlik denetimleri tamamlanıyor."
+        ],
+        getResponse: (prompt) => `**[BilalAI 1.0 - Pro Detaylı Mimarisi]**\n\n### 1. Sistem Tasarımı ve Mantığı\n"${prompt}" talebiniz için nesne yönelimli ve ölçeklenebilir kod mimarisi tasarlanmıştır.\n\n### 2. Üretime Hazır Kod Yapısı\n\`\`\`javascript\n/**\n * BilalAI 1.0 - Pro Modül Mimarisi\n */\nclass ProfessionalModule {\n  constructor(config) {\n    this.config = config;\n  }\n\n  async executeTask() {\n    try {\n      console.log("Pro işlem yürütülüyor:", this.config);\n      return { status: "success", data: "${prompt}" };\n    } catch (error) {\n      console.error("Modül hatası:", error);\n    }\n  }\n}\n\nconst moduleInstance = new ProfessionalModule({ debug: true });\nmoduleInstance.executeTask();\n\`\`\`\n\n### 3. Optimizasyon Önerileri\n- Modülü mikroservis yapısına entegre edebilirsiniz.\n- Yüksek yük altında bellek tüketimini izlemek için monitoring araçları kullanabilirsiniz.`
+      }
+    };
+
     let state = {
       theme: 'dark',
       history: [],
@@ -393,7 +416,7 @@
       renderChat();
       setupEvents();
       if (state.history.length === 0) {
-        addAiMessage("Merhaba! Ben **BilalAI 1.0 - Flash**. Kod yazma, uygulama geliştirme ve insan talimatlarını anlama konusunda uzmanım. Bugün ne inşa ediyoruz?");
+        addAiMessage("Merhaba! Ben **BilalAI**. Gelişmiş yapay zeka mimariniz hazır. Seçilen modele göre otomatik yanıt üretimi yapabilirim.");
       }
     });
 
@@ -404,6 +427,7 @@
       }
       document.documentElement.setAttribute('data-theme', state.theme);
       document.getElementById('modelSelect').value = state.activeModel;
+      updateModelUI(state.activeModel);
     }
 
     function saveState() {
@@ -415,6 +439,11 @@
         performanceScore: state.performanceScore,
         activeModel: state.activeModel
       }));
+    }
+
+    function updateModelUI(modelName) {
+      const config = MODEL_CONFIGS[modelName] || MODEL_CONFIGS['BilalAI 1.0 - Flash'];
+      document.getElementById('currentModelBadge').innerText = config.badgeText;
     }
 
     function setupEvents() {
@@ -431,7 +460,7 @@
 
       document.getElementById('modelSelect').addEventListener('change', (e) => {
         state.activeModel = e.target.value;
-        document.getElementById('currentModelBadge').innerText = state.activeModel.replace('BilalAI ', '');
+        updateModelUI(state.activeModel);
         saveState();
       });
 
@@ -529,7 +558,7 @@
       } else {
         div.innerHTML = `
           <div class="bubble">
-            ${msg.thinking ? `<div class="thinking-box">💭 <strong>Akıl Yürütme:</strong> ${escapeHTML(msg.thinking)}</div>` : ''}
+            ${msg.thinking ? `<div class="thinking-box">💭 <strong>Akıl Yürütme Süzgeci:</strong>\n${escapeHTML(msg.thinking)}</div>` : ''}
             <div>${parseMarkdown(msg.text)}</div>
           </div>
           <div class="feedback-actions">
@@ -544,23 +573,26 @@
 
     function processResponse(text, isSystem) {
       const container = document.getElementById('chatContainer');
+      const currentConfig = MODEL_CONFIGS[state.activeModel] || MODEL_CONFIGS['BilalAI 1.0 - Flash'];
+
       const thinkingDiv = document.createElement('div');
       thinkingDiv.classList.add('message', 'ai');
-      thinkingDiv.innerHTML = `<div class="bubble" style="opacity: 0.7;">⚡ <i>${state.activeModel} analiz ediyor...</i></div>`;
+      thinkingDiv.innerHTML = `<div class="bubble" style="opacity: 0.7;">⚡ <i>${state.activeModel} analiz ediyor (${currentConfig.thinkingTime / 1000}s)...</i></div>`;
       container.appendChild(thinkingDiv);
       container.scrollTop = container.scrollHeight;
 
+      // Modele Özel Süre Devreye Giriyor
       setTimeout(() => {
         thinkingDiv.remove();
         let thinking = "";
         let response = "";
 
         if (isSystem) {
-          thinking = "Sistem komutu doğrulandı. Kurucu kimliği tespit edildi.";
-          response = "Merhaba Kurucum, Bilal. Sistem mesajınızı aldım ve talimatlarınızı güncelledim.";
+          thinking = "Sistem seviyesinde Kurucu doğrulaması yapıldı.";
+          response = "Merhaba Kurucum, Bilal. Sistem mesajınızı aldım ve ilgili yönlendirmeleri aktif ettim.";
         } else {
-          thinking = "Kullanıcı talebi analiz ediliyor. Kod yapısı ve gereksinimler taranıyor.";
-          response = `**${state.activeModel}** ile yanıtım:\n\nİstediğiniz projenin mimarisini oluşturuyorum. İşte örnek yapı:\n\n\`\`\`javascript\nconsole.log("${text} projesi başlatıldı.");\n\`\`\``;
+          thinking = currentConfig.reasoningSteps.join("\n");
+          response = currentConfig.getResponse(text);
         }
 
         state.performanceScore = Math.min(100, state.performanceScore + 1);
@@ -568,7 +600,7 @@
         state.history.push(aiMsg);
         saveState();
         renderSingleMsg(aiMsg);
-      }, 1000);
+      }, currentConfig.thinkingTime);
     }
 
     window.feedback = function(id, type) {
@@ -600,6 +632,7 @@
       let h = escapeHTML(s);
       h = h.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
       h = h.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      h = h.replace(/### (.*?)\n/g, '<h4 style="color:var(--accent-color);margin:8px 0;">$1</h4>');
       return h.replace(/\n/g, '<br>');
     }
   </script>
