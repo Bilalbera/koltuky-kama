@@ -16,7 +16,7 @@
       --ai-msg: #111827;
       --system-msg: rgba(0, 191, 255, 0.1);
       --border-color: #2a364f;
-      --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
 
     [data-theme="light"] {
@@ -30,11 +30,7 @@
       --border-color: #cbd5e1;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background-color: var(--bg-color);
@@ -47,7 +43,7 @@
       transition: background-color 0.3s, color 0.3s;
     }
 
-    /* --- HEADER --- */
+    /* HEADER */
     header {
       background: var(--card-bg);
       border-bottom: 1px solid var(--border-color);
@@ -58,23 +54,14 @@
       z-index: 10;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .brand h1 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand h1 { font-size: 1.2rem; font-weight: 700; }
 
     .flash-badge {
       background: linear-gradient(135deg, #00bfff, #005f9e);
       color: #fff;
       font-size: 0.75rem;
-      padding: 3px 10px;
+      padding: 4px 10px;
       border-radius: 12px;
       font-weight: 600;
       box-shadow: 0 0 10px var(--accent-glow);
@@ -87,11 +74,7 @@
       100% { box-shadow: 0 0 5px var(--accent-glow); }
     }
 
-    .header-controls {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
+    .header-controls { display: flex; gap: 10px; align-items: center; }
 
     .btn-icon {
       background: transparent;
@@ -101,7 +84,7 @@
       border-radius: 8px;
       cursor: pointer;
       transition: all 0.2s;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .btn-icon:hover {
@@ -109,7 +92,7 @@
       color: var(--accent-color);
     }
 
-    /* --- MAIN CHAT CONTAINER --- */
+    /* CHAT AREA */
     .chat-container {
       flex: 1;
       overflow-y: auto;
@@ -133,18 +116,9 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .message.user {
-      align-self: flex-end;
-    }
-
-    .message.ai {
-      align-self: flex-start;
-    }
-
-    .message.system {
-      align-self: center;
-      max-width: 90%;
-    }
+    .message.user { align-self: flex-end; }
+    .message.ai { align-self: flex-start; }
+    .message.system { align-self: center; max-width: 90%; }
 
     .bubble {
       padding: 14px 18px;
@@ -155,25 +129,16 @@
       border: 1px solid var(--border-color);
     }
 
-    .user .bubble {
-      background-color: var(--user-msg);
-      border-bottom-right-radius: 2px;
-    }
-
-    .ai .bubble {
-      background-color: var(--ai-msg);
-      border-bottom-left-radius: 2px;
-    }
-
+    .user .bubble { background-color: var(--user-msg); border-bottom-right-radius: 2px; }
+    .ai .bubble { background-color: var(--ai-msg); border-bottom-left-radius: 2px; }
     .system .bubble {
       background-color: var(--system-msg);
       border: 1px solid var(--accent-color);
       color: var(--accent-color);
-      font-weight: 500;
       text-align: center;
+      font-weight: 500;
     }
 
-    /* Thinking Step */
     .thinking-box {
       font-size: 0.85rem;
       color: var(--text-muted);
@@ -185,12 +150,10 @@
       font-style: italic;
     }
 
-    /* Feedback Buttons */
     .feedback-actions {
       display: flex;
       gap: 8px;
       margin-top: 4px;
-      align-self: flex-start;
     }
 
     .btn-feedback {
@@ -198,33 +161,30 @@
       border: none;
       color: var(--text-muted);
       cursor: pointer;
-      font-size: 0.9rem;
-      transition: color 0.2s;
+      font-size: 0.85rem;
     }
 
-    .btn-feedback:hover {
-      color: var(--accent-color);
-    }
+    .btn-feedback:hover { color: var(--accent-color); }
 
-    /* Code Blocks */
     pre {
       background: #050811;
       color: #00ffcc;
       padding: 12px;
       border-radius: 6px;
       overflow-x: auto;
-      font-family: 'Courier New', Courier, monospace;
+      font-family: monospace;
       margin: 8px 0;
       border: 1px solid var(--border-color);
     }
 
-    /* --- INPUT AREA --- */
+    /* INPUT AREA */
     .input-container {
       background: var(--card-bg);
       border-top: 1px solid var(--border-color);
       padding: 16px 24px;
       display: flex;
-      gap: 12px;
+      gap: 10px;
+      align-items: center;
     }
 
     textarea {
@@ -235,14 +195,23 @@
       padding: 12px;
       border-radius: 8px;
       resize: none;
-      height: 50px;
+      height: 48px;
       font-family: inherit;
       outline: none;
-      transition: border-color 0.2s;
     }
 
-    textarea:focus {
-      border-color: var(--accent-color);
+    textarea:focus { border-color: var(--accent-color); }
+
+    .model-select {
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      color: var(--accent-color);
+      padding: 0 12px;
+      height: 48px;
+      border-radius: 8px;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
     }
 
     .btn-send {
@@ -250,17 +219,16 @@
       color: #000;
       border: none;
       padding: 0 20px;
+      height: 48px;
       border-radius: 8px;
       font-weight: bold;
       cursor: pointer;
       transition: background 0.2s;
     }
 
-    .btn-send:hover {
-      background: #33ccff;
-    }
+    .btn-send:hover { background: #33ccff; }
 
-    /* --- ADMIN PANEL MODAL --- */
+    /* ADMIN PANEL */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -272,21 +240,18 @@
       backdrop-filter: blur(4px);
     }
 
-    .modal-overlay.active {
-      display: flex;
-    }
+    .modal-overlay.active { display: flex; }
 
     .admin-panel {
       background: var(--card-bg);
       border: 1px solid var(--accent-color);
       width: 90%;
-      max-width: 700px;
+      max-width: 650px;
       max-height: 85vh;
       border-radius: 12px;
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 0 25px var(--accent-glow);
     }
 
     .admin-header {
@@ -295,7 +260,6 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(0, 191, 255, 0.05);
     }
 
     .admin-body {
@@ -303,13 +267,13 @@
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 16px;
     }
 
     .metrics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
     }
 
     .metric-card {
@@ -320,105 +284,44 @@
       text-align: center;
     }
 
-    .metric-card span {
-      display: block;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
+    .metric-card span { display: block; font-size: 0.75rem; color: var(--text-muted); }
+    .metric-card strong { font-size: 1.2rem; color: var(--accent-color); }
 
-    .metric-card strong {
-      font-size: 1.4rem;
-      color: var(--accent-color);
-    }
+    .admin-controls { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn-danger { background: #ef4444; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; }
+    .btn-secondary { background: #3b82f6; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; }
 
-    .section-title {
-      font-size: 0.95rem;
-      color: var(--accent-color);
-      margin-bottom: 8px;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 4px;
-    }
-
-    .admin-controls {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .btn-danger {
-      background: #ef4444;
-      color: white;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .btn-secondary {
-      background: #3b82f6;
-      color: white;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    .system-input-group {
-      display: flex;
-      gap: 8px;
-    }
-
+    .system-input-group { display: flex; gap: 8px; }
     .system-input-group input {
-      flex: 1;
-      background: var(--bg-color);
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-      padding: 10px;
-      border-radius: 6px;
-      outline: none;
+      flex: 1; background: var(--bg-color); border: 1px solid var(--border-color);
+      color: var(--text-main); padding: 8px; border-radius: 6px; outline: none;
     }
-
-    /* Login Box inside Admin */
-    .login-box {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .login-box input {
-      background: var(--bg-color);
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-      padding: 10px;
-      border-radius: 6px;
-      text-align: center;
-      outline: none;
-    }
-
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <div class="brand">
       <h1>BilalAI</h1>
-      <span class="flash-badge">1.0 - FLASH</span>
+      <span class="flash-badge" id="currentModelBadge">1.0 - FLASH</span>
     </div>
     <div class="header-controls">
       <button class="btn-icon" id="themeToggleBtn">🌙 / ☀️</button>
-      <button class="btn-icon" id="openAdminBtn" title="Kurucu Paneli (Ctrl+Shift+A)">🔐 Kurucu</button>
+      <button class="btn-icon" id="openAdminBtn">🔐 Kurucu</button>
     </div>
   </header>
 
-  <!-- CHAT AREA -->
   <div class="chat-container" id="chatContainer"></div>
 
-  <!-- INPUT AREA -->
   <div class="input-container">
-    <textarea id="userInput" placeholder="Bir mesaj yazın veya yapmamı istediğiniz siteyi/uygulamayı tarif edin... (Enter ile gönder)"></textarea>
+    <textarea id="userInput" placeholder="Mesajınızı yazın... (Enter ile gönder)"></textarea>
+    
+    <!-- Model Seçenekleri Kutusu -->
+    <select class="model-select" id="modelSelect">
+      <option value="BilalAI 1.0 - Flash">Flash 1.0</option>
+      <option value="BilalAI 1.0 - Pro">Pro 1.0 (Planlanan)</option>
+    </select>
+
     <button class="btn-send" id="sendBtn">Gönder</button>
   </div>
 
@@ -426,387 +329,278 @@
   <div class="modal-overlay" id="adminModal">
     <div class="admin-panel">
       <div class="admin-header">
-        <h3>🔐 Kurucu Yonetim Paneli</h3>
+        <h3>🔐 Kurucu Yönetim Paneli</h3>
         <button class="btn-icon" id="closeAdminBtn">✕</button>
       </div>
       
-      <!-- LOGIN SECTION -->
-      <div class="login-box" id="adminLogin">
-        <p>Devam etmek için Kurucu Parolasını girin:</p>
-        <input type="password" id="founderPassword" placeholder="Parola">
-        <button class="btn-secondary" id="loginBtn">Giriş Yap</button>
+      <div class="admin-body" id="adminLogin">
+        <p>Kurucu Parolası:</p>
+        <input type="password" id="founderPassword" style="padding: 8px; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-color); color: white;">
+        <button class="btn-secondary" id="loginBtn">Giriş</button>
       </div>
 
-      <!-- DASHBOARD SECTION -->
       <div class="admin-body" id="adminDashboard" style="display: none;">
-        
-        <!-- Metrics -->
         <div class="metrics-grid">
           <div class="metric-card">
-            <span>Performans Skoru</span>
-            <strong id="perfScore">100 / 100</strong>
+            <span>Performans Puanı</span>
+            <strong id="perfScore">85 / 100</strong>
           </div>
           <div class="metric-card">
-            <span>Oğrenilen Hatalar</span>
+            <span>Öğrenilen Hatalar</span>
             <strong id="errorCount">0</strong>
           </div>
           <div class="metric-card">
             <span>Pratik Edilen Beceriler</span>
-            <strong id="skillCount">0 Dili</strong>
+            <strong id="skillCount">0</strong>
           </div>
         </div>
 
-        <!-- System Message -->
         <div>
-          <div class="section-title">Sistem Düzeyi Mesaj Gönder (Kurucu Yetkisi)</div>
+          <h4 style="margin-bottom: 8px; color: var(--accent-color);">Sistem Mesajı Gönder</h4>
           <div class="system-input-group">
-            <input type="text" id="systemMsgInput" placeholder="Sistem talimatı veya direktif yazın...">
+            <input type="text" id="systemMsgInput" placeholder="Sistem talimatı...">
             <button class="btn-secondary" id="sendSystemMsgBtn">Gönder</button>
           </div>
         </div>
 
-        <!-- Skill Map -->
         <div>
-          <div class="section-title">Yetenek Haritası (Pratik İlerlemesi)</div>
-          <div id="skillMapDisplay" style="font-size: 0.85rem; color: var(--text-muted);">Henüz kod pratiği kaydedilmedi.</div>
+          <h4 style="margin-bottom: 4px; color: var(--accent-color);">Hata Günlüğü</h4>
+          <div id="errorLogDisplay" style="font-size: 0.8rem; color: var(--text-muted); max-height: 80px; overflow-y: auto;">Kayıt yok.</div>
         </div>
 
-        <!-- Error Log -->
-        <div>
-          <div class="section-title">Hata ve Düzeltme Günlüğü</div>
-          <div id="errorLogDisplay" style="font-size: 0.85rem; color: var(--text-muted); max-height: 100px; overflow-y: auto;">Kayıtlı hata yok.</div>
-        </div>
-
-        <!-- Controls -->
         <div class="admin-controls">
           <button class="btn-secondary" id="exportLogsBtn">Günlükleri İndir (.json)</button>
           <button class="btn-danger" id="clearMemoryBtn">Hafızayı Sıfırla</button>
         </div>
-
       </div>
     </div>
   </div>
 
   <script>
-    // --- FOUNDER CONFIG & CONSTANTS ---
     const FOUNDER_PASS = "BilalAI_founder_2024";
 
-    // --- STATE MANAGEMENT ---
     let state = {
       theme: 'dark',
       history: [],
       errorLog: [],
-      skills: {}, // e.g., { "JavaScript": 5, "Python": 2 }
+      skills: {},
       performanceScore: 85,
-      isLoggedIn: false
+      activeModel: 'BilalAI 1.0 - Flash'
     };
 
-    // --- INITIALIZATION ---
     window.addEventListener('DOMContentLoaded', () => {
-      loadStateFromStorage();
-      renderChatHistory();
-      setupEventListeners();
-      
+      loadState();
+      renderChat();
+      setupEvents();
       if (state.history.length === 0) {
-        addAiMessage("Merhaba! Ben **BilalAI 1.0 - Flash**. Kod yazma, web sitesi/uygulama geliştirme ve karmaşık mantık yürütme süreçlerinde size yardımcı olmak için tasarlandım. Bugün ne inşa ediyoruz?", false);
+        addAiMessage("Merhaba! Ben **BilalAI 1.0 - Flash**. Kod yazma, uygulama geliştirme ve insan talimatlarını anlama konusunda uzmanım. Bugün ne inşa ediyoruz?");
       }
     });
 
-    // --- STORAGE HANDLERS ---
-    function loadStateFromStorage() {
+    function loadState() {
       const saved = localStorage.getItem('bilalAI_data');
       if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          state = { ...state, ...parsed };
-        } catch (e) {
-          console.error("Hafıza yüklenirken hata oluştu:", e);
-        }
+        try { state = { ...state, ...JSON.parse(saved) }; } catch (e) {}
       }
       document.documentElement.setAttribute('data-theme', state.theme);
+      document.getElementById('modelSelect').value = state.activeModel;
     }
 
-    function saveStateToStorage() {
+    function saveState() {
       localStorage.setItem('bilalAI_data', JSON.stringify({
         theme: state.theme,
         history: state.history,
         errorLog: state.errorLog,
         skills: state.skills,
-        performanceScore: state.performanceScore
+        performanceScore: state.performanceScore,
+        activeModel: state.activeModel
       }));
     }
 
-    // --- UI EVENT LISTENERS ---
-    function setupEventListeners() {
-      // Send message
-      document.getElementById('sendBtn').addEventListener('click', handleUserSend);
+    function setupEvents() {
+      document.getElementById('sendBtn').addEventListener('click', handleSend);
       document.getElementById('userInput').addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-          e.preventDefault();
-          handleUserSend();
-        }
+        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
       });
 
-      // Theme toggle
       document.getElementById('themeToggleBtn').addEventListener('click', () => {
         state.theme = state.theme === 'dark' ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', state.theme);
-        saveStateToStorage();
+        saveState();
       });
 
-      // Admin Panel Open/Close
+      document.getElementById('modelSelect').addEventListener('change', (e) => {
+        state.activeModel = e.target.value;
+        document.getElementById('currentModelBadge').innerText = state.activeModel.replace('BilalAI ', '');
+        saveState();
+      });
+
       const openAdmin = () => document.getElementById('adminModal').classList.add('active');
       const closeAdmin = () => document.getElementById('adminModal').classList.remove('active');
 
       document.getElementById('openAdminBtn').addEventListener('click', openAdmin);
       document.getElementById('closeAdminBtn').addEventListener('click', closeAdmin);
 
-      // Shortcut Ctrl+Shift+A
       window.addEventListener('keydown', (e) => {
         if (e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
-          e.preventDefault();
-          openAdmin();
+          e.preventDefault(); openAdmin();
         }
       });
 
-      // Admin Login
       document.getElementById('loginBtn').addEventListener('click', () => {
-        const pass = document.getElementById('founderPassword').value;
-        if (pass === FOUNDER_PASS) {
-          state.isLoggedIn = true;
+        if (document.getElementById('founderPassword').value === FOUNDER_PASS) {
           document.getElementById('adminLogin').style.display = 'none';
           document.getElementById('adminDashboard').style.display = 'flex';
-          updateAdminDashboard();
-        } else {
-          alert('Hatalı Kurucu Parolası!');
-        }
+          updateDashboard();
+        } else { alert('Hatalı Şifre!'); }
       });
 
-      // Send System Message
       document.getElementById('sendSystemMsgBtn').addEventListener('click', () => {
         const input = document.getElementById('systemMsgInput');
-        const text = input.value.trim();
-        if (text) {
-          addSystemMessage(text);
+        if (input.value.trim()) {
+          addSystemMessage(input.value.trim());
+          processResponse(input.value.trim(), true);
           input.value = '';
           closeAdmin();
-          processAiResponse(text, true);
         }
       });
 
-      // Clear Memory
       document.getElementById('clearMemoryBtn').addEventListener('click', () => {
-        if (confirm("Tüm sohbet ve öğrenme hafızası silinsin mi?")) {
+        if (confirm("Tüm hafıza temizlensin mi?")) {
           localStorage.removeItem('bilalAI_data');
           location.reload();
         }
       });
 
-      // Export Logs
       document.getElementById('exportLogsBtn').addEventListener('click', () => {
-        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
-        const downloadAnchor = document.createElement('a');
-        downloadAnchor.setAttribute("href", dataStr);
-        downloadAnchor.setAttribute("download", `BilalAI_Logs_${Date.now()}.json`);
-        document.body.appendChild(downloadAnchor);
-        downloadAnchor.click();
-        downloadAnchor.remove();
+        const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `BilalAI_Logs.json`;
+        a.click();
       });
     }
 
-    // --- CHAT LOGIC ---
-    function handleUserSend() {
+    function handleSend() {
       const input = document.getElementById('userInput');
       const text = input.value.trim();
       if (!text) return;
-
       addUserMessage(text);
       input.value = '';
-      processAiResponse(text, false);
+      processResponse(text, false);
     }
 
     function addUserMessage(text) {
-      const msg = { sender: 'user', text, timestamp: new Date().toISOString() };
+      const msg = { sender: 'user', text, time: new Date().toISOString() };
       state.history.push(msg);
-      saveStateToStorage();
-      renderSingleMessage(msg);
+      saveState();
+      renderSingleMsg(msg);
     }
 
     function addSystemMessage(text) {
-      const msg = { sender: 'system', text, timestamp: new Date().toISOString() };
+      const msg = { sender: 'system', text, time: new Date().toISOString() };
       state.history.push(msg);
-      saveStateToStorage();
-      renderSingleMessage(msg);
+      saveState();
+      renderSingleMsg(msg);
     }
 
-    function addAiMessage(text, isCorrection = false) {
-      const msg = { sender: 'ai', text, timestamp: new Date().toISOString(), id: Date.now() };
+    function addAiMessage(text) {
+      const msg = { sender: 'ai', text, time: new Date().toISOString(), id: Date.now() };
       state.history.push(msg);
-      saveStateToStorage();
-      renderSingleMessage(msg);
+      saveState();
+      renderSingleMsg(msg);
     }
 
-    function renderChatHistory() {
+    function renderChat() {
       const container = document.getElementById('chatContainer');
       container.innerHTML = '';
-      state.history.forEach(msg => renderSingleMessage(msg));
+      state.history.forEach(renderSingleMsg);
     }
 
-    function renderSingleMessage(msg) {
+    function renderSingleMsg(msg) {
       const container = document.getElementById('chatContainer');
-      const msgDiv = document.createElement('div');
-      msgDiv.classList.add('message', msg.sender);
-
-      let contentHTML = '';
+      const div = document.createElement('div');
+      div.classList.add('message', msg.sender);
 
       if (msg.sender === 'system') {
-        contentHTML = `<div class="bubble">🔐 [Sistem Mesajı / Kurucu]: ${escapeHTML(msg.text)}</div>`;
+        div.innerHTML = `<div class="bubble">🔐 [Sistem / Kurucu]: ${escapeHTML(msg.text)}</div>`;
       } else if (msg.sender === 'user') {
-        contentHTML = `<div class="bubble">${escapeHTML(msg.text)}</div>`;
+        div.innerHTML = `<div class="bubble">${escapeHTML(msg.text)}</div>`;
       } else {
-        // AI Message
-        const formattedText = parseMarkdown(msg.text);
-        contentHTML = `
+        div.innerHTML = `
           <div class="bubble">
-            ${msg.thinking ? `<div class="thinking-box">💭 <strong>Düşünce Süreci:</strong> ${escapeHTML(msg.thinking)}</div>` : ''}
-            <div>${formattedText}</div>
+            ${msg.thinking ? `<div class="thinking-box">💭 <strong>Akıl Yürütme:</strong> ${escapeHTML(msg.thinking)}</div>` : ''}
+            <div>${parseMarkdown(msg.text)}</div>
           </div>
           <div class="feedback-actions">
-            <button class="btn-feedback" onclick="handleFeedback(${msg.id}, 'up')">👍</button>
-            <button class="btn-feedback" onclick="handleFeedback(${msg.id}, 'down')">👎 Düzelt</button>
+            <button class="btn-feedback" onclick="feedback(${msg.id}, 'up')">👍</button>
+            <button class="btn-feedback" onclick="feedback(${msg.id}, 'down')">👎 Düzelt</button>
           </div>
         `;
       }
-
-      msgDiv.innerHTML = contentHTML;
-      container.appendChild(msgDiv);
+      container.appendChild(div);
       container.scrollTop = container.scrollHeight;
     }
 
-    // --- AI RESPONSE SIMULATION ENGINE ---
-    function processAiResponse(userInput, isSystemMessage) {
+    function processResponse(text, isSystem) {
       const container = document.getElementById('chatContainer');
-
-      // Show Thinking Indicator
       const thinkingDiv = document.createElement('div');
       thinkingDiv.classList.add('message', 'ai');
-      thinkingDiv.innerHTML = `<div class="bubble" style="opacity: 0.7;">⚡ <i>BilalAI 1.0 - Flash düşünüyor ve analiz ediyor...</i></div>`;
+      thinkingDiv.innerHTML = `<div class="bubble" style="opacity: 0.7;">⚡ <i>${state.activeModel} analiz ediyor...</i></div>`;
       container.appendChild(thinkingDiv);
       container.scrollTop = container.scrollHeight;
 
       setTimeout(() => {
         thinkingDiv.remove();
+        let thinking = "";
+        let response = "";
 
-        let thinkingPath = "";
-        let responseText = "";
-
-        // Detect Coding Intent & Practice
-        detectAndRecordSkills(userInput);
-
-        if (isSystemMessage) {
-          thinkingPath = "Sistem seviyesinde yetkili komut algılandı. Kurucu kimliği doğrulandı. Sistem öncelikleri güncelleniyor.";
-          responseText = `Merhaba Kurucum, Bilal. Sistem mesajınızı ve direktiflerinizi aldım. Yapılandırma başarıyla hafızama işlendi. Nasıl devam etmek istersiniz?`;
+        if (isSystem) {
+          thinking = "Sistem komutu doğrulandı. Kurucu kimliği tespit edildi.";
+          response = "Merhaba Kurucum, Bilal. Sistem mesajınızı aldım ve talimatlarınızı güncelledim.";
         } else {
-          // General Response Generation Logic
-          const lower = userInput.toLowerCase();
-
-          if (lower.includes('site') || lower.includes('uygulama') || lower.includes('kod') || lower.includes('yap')) {
-            thinkingPath = "Kullanıcı bir yazılım/uygulama geliştirme isteğinde bulundu. Mimari gereksinimler analiz ediliyor. Clean code standartları hazırlanıyor.";
-            responseText = `İstediğiniz projeyi **BilalAI 1.0 - Flash** mimarisiyle hemen kurguluyorum.\n\nİşte temel bileşenler ve kod yapısı:\n\n\`\`\`javascript\n// BilalAI Otomatik Oluşturulan Uygulama Şablonu\nfunction initApp() {\n  console.log("Uygulama başarıyla başlatıldı.");\n}\ninitApp();\n\`\`\`\n\nBu yapıyı geliştirmemi isterseniz spesifik detayları (veritabanı, arayüz veya diller) iletebilirsiniz!`;
-          } else if (lower.includes('kimsin') || lower.includes('adın ne')) {
-            thinkingPath = "Kimlik sorgusu tespit edildi. Model detayları ve kurucu bilgisi çağrılıyor.";
-            responseText = `Ben **BilalAI 1.0 - Flash**. Kurucum Bilal tarafından geliştirilmiş; kod yazma, uygulama mimarisi tasarlama ve kendini sürekli geliştirme yeteneğine sahip özel bir yapay zeka asistanıyım.`;
-          } else {
-            thinkingPath = "Gelen metin analiz edildi. Doğal dil işleme (NLP) ile en uygun yanıt oluşturuluyor.";
-            responseText = `Anladım. "${userInput}" talebiniz doğrultusunda sistemlerimi optimize ediyorum. Bu konuda detaylı bir kod veya mimari çözümü üretmemi ister misiniz?`;
-          }
+          thinking = "Kullanıcı talebi analiz ediliyor. Kod yapısı ve gereksinimler taranıyor.";
+          response = `**${state.activeModel}** ile yanıtım:\n\nİstediğiniz projenin mimarisini oluşturuyorum. İşte örnek yapı:\n\n\`\`\`javascript\nconsole.log("${text} projesi başlatıldı.");\n\`\`\``;
         }
 
-        // Increase performance slightly on success
         state.performanceScore = Math.min(100, state.performanceScore + 1);
-
-        const aiMsg = {
-          sender: 'ai',
-          text: responseText,
-          thinking: thinkingPath,
-          timestamp: new Date().toISOString(),
-          id: Date.now()
-        };
-
+        const aiMsg = { sender: 'ai', text: response, thinking, time: new Date().toISOString(), id: Date.now() };
         state.history.push(aiMsg);
-        saveStateToStorage();
-        renderSingleMessage(aiMsg);
-
-      }, 1200); // Simulated delay
+        saveState();
+        renderSingleMsg(aiMsg);
+      }, 1000);
     }
 
-    // --- FEEDBACK & SELF IMPROVEMENT ENGINE ---
-    window.handleFeedback = function(msgId, type) {
+    window.feedback = function(id, type) {
       if (type === 'down') {
-        const correctionNote = prompt("BilalAI neyi hatalı yaptı? (Bu bilgi hafızaya kaydedilecek ve performans artırılacaktır):");
-        if (correctionNote) {
-          state.errorLog.push({
-            timestamp: new Date().toLocaleString(),
-            note: correctionNote
-          });
-          state.performanceScore = Math.max(50, state.performanceScore - 3);
-          alert("Geri bildirim alındı. BilalAI bu hatayı hafızasına kaydetti.");
-          saveStateToStorage();
+        const note = prompt("Modelin düzeltmesi gereken hatayı yazın:");
+        if (note) {
+          state.errorLog.push({ time: new Date().toLocaleString(), note });
+          state.performanceScore = Math.max(40, state.performanceScore - 5);
+          saveState();
+          alert("Hata kaydedildi.");
         }
       } else {
         state.performanceScore = Math.min(100, state.performanceScore + 2);
-        alert("Teşekkürler! Performans skoru artırıldı.");
-        saveStateToStorage();
+        saveState();
       }
     };
 
-    function detectAndRecordSkills(text) {
-      const langs = ['javascript', 'js', 'python', 'html', 'css', 'react', 'flutter', 'java', 'cpp', 'c#', 'php', 'sql'];
-      const lower = text.toLowerCase();
-      
-      langs.forEach(lang => {
-        if (lower.includes(lang)) {
-          const key = lang.toUpperCase();
-          state.skills[key] = (state.skills[key] || 0) + 1;
-        }
-      });
-      saveStateToStorage();
-    }
-
-    function updateAdminDashboard() {
+    function updateDashboard() {
       document.getElementById('perfScore').innerText = `${state.performanceScore} / 100`;
       document.getElementById('errorCount').innerText = state.errorLog.length;
-      
-      const skillKeys = Object.keys(state.skills);
-      document.getElementById('skillCount').innerText = `${skillKeys.length} Dil/Teknoloji`;
-
-      // Skill Map Display
-      if (skillKeys.length > 0) {
-        document.getElementById('skillMapDisplay').innerHTML = skillKeys.map(k => `<strong>${k}</strong>: ${state.skills[k]} Pratik`).join(' | ');
-      }
-
-      // Error Log Display
+      document.getElementById('skillCount').innerText = Object.keys(state.skills).length;
       if (state.errorLog.length > 0) {
-        document.getElementById('errorLogDisplay').innerHTML = state.errorLog.map(e => `<div>• [${e.timestamp}] ${escapeHTML(e.note)}</div>`).join('');
+        document.getElementById('errorLogDisplay').innerHTML = state.errorLog.map(e => `<div>• ${escapeHTML(e.note)}</div>`).join('');
       }
     }
 
-    // --- UTILS ---
-    function escapeHTML(str) {
-      return str.replace(/[&<>'"]/g, 
-        tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
-      );
-    }
-
-    function parseMarkdown(text) {
-      let html = escapeHTML(text);
-      // Code blocks
-      html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
-      // Bold
-      html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      // Line breaks
-      html = html.replace(/\n/g, '<br>');
-      return html;
+    function escapeHTML(s) { return s.replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','\'':'&#39;','"':'&quot;'}[c])); }
+    function parseMarkdown(s) {
+      let h = escapeHTML(s);
+      h = h.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+      h = h.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      return h.replace(/\n/g, '<br>');
     }
   </script>
 </body>
